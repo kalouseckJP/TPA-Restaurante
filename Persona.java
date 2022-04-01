@@ -15,14 +15,14 @@ class Trabajador extends Persona{
     int Horarios;
 
 }
-class Anfitrion extends Persona{
+class Anfitrion extends Trabajador{
     int mesasUtilizadas;
 
 }
-class Metre extends Persona{
+class Metre extends Trabajador{
     
 }
-class Runner extends Persona{
+class Runner extends Trabajador{
     String platos;
     String bebestibles;
 public void tomarComanda(){
@@ -32,19 +32,19 @@ public void entregarComanda(){
     
 }
 }
-class Coperos extends Persona{
+class Coperos extends Trabajador{
     
 }
-class Auxiliares extends Persona{
+class Auxiliares extends Trabajador{
     
 }
-class Bar extends Persona{
+class Bar extends Trabajador{
     
 }
-class Cocineros extends Persona{
+class Cocineros extends Trabajador{
     
 }
-class Chef extends Persona{
+class Chef extends Trabajador{
     String menuEspecial;
     int costoMenuEspecial;
 }
