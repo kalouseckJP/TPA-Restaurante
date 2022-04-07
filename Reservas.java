@@ -6,14 +6,5 @@ public class Reservas{
     String planDegustacion;
 public void guardarDatos(){
 
-}
-}
-class Normal extends Reservas{
-    int dinero;
-    String area;
-
-}
-class Evento extends Reservas{
-    String servicioExtra;
-    String Especial;
+    }
 }
