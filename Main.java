@@ -19,12 +19,23 @@ public class Main {
     }
     Scanner sc = new Scanner(System.in);
     
-    public void nuevoCliente(String nombreCliente, int rutCliente,Boolean clienteHotel){
+    public void nuevoCliente(){
         String nombre = sc.nextLine();
         int rut = sc.nextInt();
         Boolean visitHotel = sc.nextBoolean();
         Boolean reserva = sc.nextBoolean();
         Cliente x = new Cliente(nombre, rut, visitHotel,reserva);
-        
+        if(reserva){
+            int fecha = sc.nextInt();
+            int horaInicio = sc.nextInt();
+            int horaFin = sc.nextInt();
+            int cantidad = sc.nextInt();
+            int dinero = sc.nextInt();
+            String planComida = sc.nextLine();
+            String planDegustacion = sc.nextLine();
+            String tipoReserva = sc.nextLine();
+            String area = sc.nextLine();
+            Reservas reservaNueva = new Reservas(fecha, horaInicio, horaFin, cantidad, dinero, planComida, planDegustacion, tipoReserva, area);
+        }
     }
 }
