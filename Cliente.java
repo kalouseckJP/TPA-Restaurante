@@ -3,8 +3,8 @@ public class Cliente extends Persona{
 
     Boolean reserva;
 
-    Cliente(String nombre, int rut, Boolean visitHotel, Boolean reserva){
-        super(nombre, rut);
+    Cliente(String nombre,String apellido, int rut, int edad, Boolean visitHotel, Boolean reserva){
+        super(nombre, apellido, rut, edad);
         this.visitHotel=visitHotel;
         this.reserva=reserva;
     }

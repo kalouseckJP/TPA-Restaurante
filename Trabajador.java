@@ -2,8 +2,8 @@ public class Trabajador extends Persona {
     Boolean enTurno;
     String trabajo;
 
-    Trabajador(String nombre,int rut, Boolean enTurno, String trabajo){
-        super(nombre,rut);
+    Trabajador(String nombre,String apellido,int rut,int edad, Boolean enTurno, String trabajo){
+        super(nombre, apellido, rut, edad);
         this.enTurno=enTurno;
         this.trabajo=trabajo;
     }
