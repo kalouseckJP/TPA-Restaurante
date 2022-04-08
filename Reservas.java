@@ -14,10 +14,7 @@ public class Reservas{
         this.horaFin = horaFin;
         this.cantidad = cantidad;
         this.planComida = planComida;
+        this.dinero = dinero;
         this.planDegustacion = planDegustacion;
-    }
-
-    public void guardarDatos(){
-
     }
 }

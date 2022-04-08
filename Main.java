@@ -15,10 +15,11 @@ public class Main {
         Trabajador bar = new Trabajador("", 6, true, "Bar");
         Trabajador cocinero = new Trabajador("", 3, true, "Cocinero");
         Trabajador chef = new Trabajador("", 7, true, "Chef");
-
     }
+    
     Scanner sc = new Scanner(System.in);
     
+
     public void nuevoCliente(){
         String nombre = sc.nextLine();
         int rut = sc.nextInt();
@@ -26,16 +27,20 @@ public class Main {
         Boolean reserva = sc.nextBoolean();
         Cliente x = new Cliente(nombre, rut, visitHotel,reserva);
         if(reserva){
-            int fecha = sc.nextInt();
-            int horaInicio = sc.nextInt();
-            int horaFin = sc.nextInt();
-            int cantidad = sc.nextInt();
-            int dinero = sc.nextInt();
-            String planComida = sc.nextLine();
-            String planDegustacion = sc.nextLine();
-            String tipoReserva = sc.nextLine();
-            String area = sc.nextLine();
-            Reservas reservaNueva = new Reservas(fecha, horaInicio, horaFin, cantidad, dinero, planComida, planDegustacion, tipoReserva, area);
+            nuevaReserva();
         }
+    }
+
+    public void nuevaReserva(){
+        int fecha = sc.nextInt();
+        int horaInicio = sc.nextInt();
+        int horaFin = sc.nextInt();
+        int cantidad = sc.nextInt();
+        int dinero = sc.nextInt();
+        String planComida = sc.nextLine();
+        String planDegustacion = sc.nextLine();
+        String tipoReserva = sc.nextLine();
+        String area = sc.nextLine();
+        Reservas reservaNueva = new Reservas(fecha, horaInicio, horaFin, cantidad, dinero, planComida, planDegustacion, tipoReserva, area);
     }
 }
