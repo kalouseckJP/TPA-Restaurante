@@ -4,7 +4,8 @@ public class Reservas{
     int cantidad;
     String planComida;
     String planDegustacion;
-public void guardarDatos(){
+    
+    public void guardarDatos(){
 
     }
 }

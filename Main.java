@@ -13,5 +13,10 @@ public class Main {
         Trabajador bar = new Trabajador("", 6, true, "Bar");
         Trabajador cocinero = new Trabajador("", 3, true, "Cocinero");
         Trabajador chef = new Trabajador("", 7, true, "Chef");
+
+        
+        public void nuevoCliente(){
+
+        }
     }
 }

@@ -3,4 +3,9 @@ public class Cliente extends Persona{
 
     public void reservar(){
     }
+
+    Cliente(String nombre, int rut, Boolean visitHotel){
+        super(nombre, rut);
+        this.visitHotel=visitHotel;
+    }
 }
