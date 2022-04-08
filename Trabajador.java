@@ -1,7 +1,12 @@
 public class Trabajador extends Persona {
     Boolean enTurno;
-    int Horarios;
     String trabajo;
+
+    Trabajador(String nombre,int rut, Boolean enTurno, String trabajo){
+        super(nombre,rut);
+        this.enTurno=enTurno;
+        this.trabajo=trabajo;
+    }
 }
 
 /*}
