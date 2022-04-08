@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args){
         Areas salaVaras = new Areas(30,30,"Sala Varas");
@@ -14,9 +16,15 @@ public class Main {
         Trabajador cocinero = new Trabajador("", 3, true, "Cocinero");
         Trabajador chef = new Trabajador("", 7, true, "Chef");
 
+    }
+    Scanner sc = new Scanner(System.in);
+    
+    public void nuevoCliente(String nombreCliente, int rutCliente,Boolean clienteHotel){
+        String nombre = sc.nextLine();
+        int rut = sc.nextInt();
+        Boolean visitHotel = sc.nextBoolean();
+        Boolean reserva = sc.nextBoolean();
+        Cliente x = new Cliente(nombre, rut, visitHotel,reserva);
         
-        public void nuevoCliente(){
-
-        }
     }
 }

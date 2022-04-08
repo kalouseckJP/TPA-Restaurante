@@ -1,12 +1,11 @@
 public class Cliente extends Persona{
     Boolean visitHotel;
 
-    public void reservar(){
-        //AQUI SE AÑADIRIA AL DOCUMENTO DE RESERVAS
-    }
+    Boolean reserva;
 
-    Cliente(String nombre, int rut, Boolean visitHotel){
+    Cliente(String nombre, int rut, Boolean visitHotel, Boolean reserva){
         super(nombre, rut);
         this.visitHotel=visitHotel;
+        this.reserva=reserva;
     }
 }
