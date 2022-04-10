@@ -25,6 +25,10 @@ public class principal{
 
         // Horas reserva
         horaInicio = Float.parseFloat(JOptionPane.showInputDialog("Escriba la hora a la cual llegara, por ejemplo:   16.30"));
+        while(horaInicio < 5 || horaInicio > 5.59 && horaInicio < 6 || horaInicio > 6.59 && horaInicio < 7 || horaInicio > 7.59 && horaInicio <
+             8 || horaInicio < 8.59 && horaInicio > 9 || horaInicio > 9.59){
+            horaInicio = Float.parseFloat(JOptionPane.showInputDialog("Escriba la hora a la cual llegara, por ejemplo:   aaaaaaaaaaaaaa.30"));
+        }
         horaFin = Float.parseFloat(JOptionPane.showInputDialog("Escriba la hora a la cual finalizará su reserva, por ejemplo:  19.50"));
         
         // Verificar si el cliente es visitante o no
