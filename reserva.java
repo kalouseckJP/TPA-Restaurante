@@ -11,6 +11,8 @@ public class reserva extends cliente {
     private String planComida;
     private String planDegustacion;
     private String area;
+    private String area2;
+    private String modalidad;
 
     // Constructor reserva NORMAL
     public reserva(String nombre, int rut, float horaInicio, float horaFin, int invitados, int mesas, String tipoReserva, String area){
@@ -24,9 +26,28 @@ public class reserva extends cliente {
         this.area = area;
     }
 
-    // Constructor reserva EVENTO
-    public reserva(){
+    // Constructor reserva EVENTO ABIERTO y CERRADO
+    public reserva(String nombre, int rut, float horaInicio, float horaFin, String tipoReserva, String modalidad, int invitados, String area){
+        this.nombre = nombre;
+        this.rut = rut;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.tipoReserva = tipoReserva;
+        this.modalidad = modalidad;
+        this.invitados = invitados;
+        this.area = area;
+    }
 
+    // Constructor reserva EVENTO SEMICERRADO
+    public reserva(String nombre, int rut, float horaInicio, float horaFin, String tipoReserva, String modalidad, int invitados, String area, String area2){
+        this.nombre = nombre;
+        this.rut = rut;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.tipoReserva = tipoReserva;
+        this.modalidad = modalidad;
+        this.invitados = invitados;
+        this.area = area;
     }
 
 
@@ -103,6 +124,13 @@ public class reserva extends cliente {
     public void setPlanDegustacion(String planDegustacion) {
         this.planDegustacion = planDegustacion;
     }
+    // Modalidad
+    public String getModalidad() {
+        return modalidad;
+    }
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
+    }
 
     // Area
     public String getArea() {
@@ -112,26 +140,39 @@ public class reserva extends cliente {
         this.area = area;
     }
 
+    // Area
+    public String getArea2() {
+        return area2;
+    }
+    public void setArea2(String area2) {
+        this.area2 = area2;
+    }
+
     // Guardar datos de reserva NORMAL
     public void guardarReservaNormal() throws IOException{
-        File archivoReservas = new File("ReservasNormales.txt");
+        File archivoReservasNormales = new File("ReservasNormales.txt");
         FileWriter escribirReserva = new FileWriter("ReservasNormales.txt", true);
-        if(archivoReservas.exists() && !archivoReservas.isDirectory()){
-            escribirReserva.append("NOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
-            " - TOTAL PERSONAS: "+getInvitados()+" - MESAS USADAS: "+getMesas()+ " - TIPO RESERVA: "+getTipoReserva()+" - AREA: "+getArea());
-            escribirReserva.close();
-        }else{
-            archivoReservas.createNewFile();
-        }
+        escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
+        " - TOTAL PERSONAS: "+getInvitados()+" - MESAS USADAS: "+getMesas()+ " - TIPO RESERVA: "+getTipoReserva()+" - AREA: "+getArea());
+        escribirReserva.close();
     }
 
-    // Guardar datos de reserva EVENTO
-    public void guardarReservaEvento(){
+    // Guardar datos de reserva EVENTO ABIERTO
+    public void guardarReservaEventoAbiertoyCerrado() throws IOException{
+        File archivoReservasEvento = new File("ReservasEvento.txt");
+        FileWriter escribirReserva = new FileWriter("ReservasEvento.txt", true);
+        escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
+        " - TOTAL PERSONAS: "+getInvitados()+" - TIPO RESERVA: "+getTipoReserva()+" - MODALIDAD: "+getModalidad()+" - AREA: "+getArea());
+        escribirReserva.close();
 
     }
 
-
-
-
-
+    // Guardar datos de reserva EVENTO SEMICERRADO
+    public void guardarReservaEventoSemicerrado() throws IOException{
+        File archivoReservasEvento = new File("ReservasEvento.txt");
+        FileWriter escribirReserva = new FileWriter("ReservasEvento.txt", true);
+        escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
+        " - TOTAL PERSONAS: "+getInvitados()+" - TIPO RESERVA: "+getTipoReserva()+" - MODALIDAD: "+getModalidad()+" - AREA 1: "+getArea()+" - AREA 2: "+getArea2());
+        escribirReserva.close();
+    }
 }

@@ -61,50 +61,117 @@ public class principal{
                 Object area_elegida = JOptionPane.showInputDialog(null, "¿Que area reservara?", "Reservacion - Evento", 
                 JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);
                 cantidadPersonasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas personas asistiran dentro de su reserva?"));
+                Object [] menuEspecial = {"Si", "No"};
+                Object confirmarMenu = JOptionPane.showInputDialog(null, "¿Desea hacer un menu especial?, este tendra un costo establecido por el chef", "Reservacion - Evento", 
+                JOptionPane.QUESTION_MESSAGE, null, menuEspecial, menuEspecial[0]);
+                if (confirmarMenu==menuEspecial[0]){
+                    cantidadPlatosEspeciales = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos menu especial desea realizar?"));
+                    int i=0;
+                    for(i=0;i<cantidadPlatosEspeciales;i++){
+                        elMenuEspecial = JOptionPane.showInputDialog("¿Ingrese el plato numero " + (i+1)+ " especial que desea?");
+                    }
+                }
+                Object [] serviciosEspeciales = {"Si", "No"};
+                Object serviciosExtra = JOptionPane.showInputDialog(null, "¿Desea tener servicios extra? - (DJ y sistemas de Sonido, Anfitrion del Evento/Espectaculo, Fotografia y estudios externos e internos, decoracion al gusto del cliente y seguridad)", "Reservacion - Evento", 
+                JOptionPane.QUESTION_MESSAGE, null, serviciosEspeciales, serviciosEspeciales[0]);
+                if(serviciosExtra==serviciosEspeciales[0]){
+                    cantidadServiciosExtras = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos servicios especiales desea tener en su evento?"));
+                    int i=0;
+                    for(i=0;i<cantidadServiciosExtras;i++){
+                        Object [] opcionesServiciosExtra = {"DJ y sistemas de sonido", "Anfitrion", "Fotografia y estudios", "Decoracion", "Seguridad"};
+                        Object servicioContratado = JOptionPane.showInputDialog(null, "Servicio numero "+(i+1)+" a contratar:", "Reservacion - Evento", 
+                        JOptionPane.QUESTION_MESSAGE, null, opcionesServiciosExtra, opcionesServiciosExtra[0]);                        
+                    }              
+                }
+            reserva EventoAbierto = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, (String)area_elegida);
+            EventoAbierto.guardarReservaEventoAbiertoyCerrado();
             }
+
                 
             // Modalidad SEMICERRADA
-            if(modalidad==modalidad_reserva[1]){
+            if(modalidad==modalidad_reserva[1]){               
+                
                 Object [] limiteSemicerrada = {"1", "2"};
                 Object cantidadAreas = JOptionPane.showInputDialog(null, "¿Cuantas area/s reservara?", "Reservacion - Evento", 
                 JOptionPane.QUESTION_MESSAGE, null, limiteSemicerrada, limiteSemicerrada[0]);
+                cantidadPersonasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas personas asistiran dentro de su reserva?"));
                 int i=0;
-                int intCantidadAreas = Integer.parseInt((String) cantidadAreas);
-                for(i=0;i<intCantidadAreas;i++){
-                    Object area_elegida = JOptionPane.showInputDialog(null, "¿Que area reservara?", "Reservacion - Evento", 
+                if (cantidadAreas==limiteSemicerrada[0]){                    
+                    Object primeraAreaElegida = JOptionPane.showInputDialog(null, "¿Que area reservara?", "Reservacion - Evento", 
                     JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);
+                    reserva ReservaEventoSemicerradoUnaArea = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, 
+                    (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, (String)primeraAreaElegida, "Sin segunda area");
+                    ReservaEventoSemicerradoUnaArea.guardarReservaEventoSemicerrado();                
+
                 }
-                cantidadPersonasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas personas asistiran dentro de su reserva?"));    
+                
+                if (cantidadAreas==limiteSemicerrada[1]){
+                    Object primeraAreaElegida = JOptionPane.showInputDialog(null, "¿Que primera area reservara?", "Reservacion - Evento", 
+                    JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);                    
+                    
+                    Object segundaAreaElegida = JOptionPane.showInputDialog(null, "¿Que segunda area reservara?", "Reservacion - Evento", 
+                    JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);
+                    reserva ReservaEventoSemicerradoDosAreas = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, 
+                    (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, (String)primeraAreaElegida, (String)segundaAreaElegida);
+                    ReservaEventoSemicerradoDosAreas.guardarReservaEventoSemicerrado();
+                }
+                
+                
+                Object [] menuEspecial = {"Si", "No"};
+                Object confirmarMenu = JOptionPane.showInputDialog(null, "¿Desea hacer un menu especial?, este tendra un costo establecido por el chef", "Reservacion - Evento", 
+                JOptionPane.QUESTION_MESSAGE, null, menuEspecial, menuEspecial[0]);
+                if (confirmarMenu==menuEspecial[0]){
+                    cantidadPlatosEspeciales = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos menu especial desea realizar?"));
+                    for(i=0;i<cantidadPlatosEspeciales;i++){
+                        elMenuEspecial = JOptionPane.showInputDialog("¿Ingrese el plato numero " + (i+1)+ " especial que desea?");
+                    }
+                }
+                Object [] serviciosEspeciales = {"Si", "No"};
+                Object serviciosExtra = JOptionPane.showInputDialog(null, "¿Desea tener servicios extra? - (DJ y sistemas de Sonido, Anfitrion del Evento/Espectaculo, Fotografia y estudios externos e internos, decoracion al gusto del cliente y seguridad)", "Reservacion - Evento", 
+                JOptionPane.QUESTION_MESSAGE, null, serviciosEspeciales, serviciosEspeciales[0]);
+                if(serviciosExtra==serviciosEspeciales[0]){
+                    cantidadServiciosExtras = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos servicios especiales desea tener en su evento?"));
+                    for(i=0;i<cantidadServiciosExtras;i++){
+                        Object [] opcionesServiciosExtra = {"DJ y sistemas de sonido", "Anfitrion", "Fotografia y estudios", "Decoracion", "Seguridad"};
+                        Object servicioContratado = JOptionPane.showInputDialog(null, "Servicio numero "+(i+1)+" a contratar:", "Reservacion - Evento", 
+                        JOptionPane.QUESTION_MESSAGE, null, opcionesServiciosExtra, opcionesServiciosExtra[0]);                        
+                    }              
+                }
+                
+                
+            
+            
+
             }
 
             // Modalidad CERRADA
             if(modalidad==modalidad_reserva[2]){
                 cantidadPersonasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas personas asistiran dentro de su reserva?"));
-            }
-
-            Object [] menuEspecial = {"Si", "No"};
-            Object confirmarMenu = JOptionPane.showInputDialog(null, "¿Desea hacer un menu especial?, este tendra un costo establecido por el chef", "Reservacion - Evento", 
-            JOptionPane.QUESTION_MESSAGE, null, menuEspecial, menuEspecial[0]);
-            if (confirmarMenu==menuEspecial[0]){
-                cantidadPlatosEspeciales = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos menu especial desea realizar?"));
-                int i=0;
-                for(i=0;i<cantidadPlatosEspeciales;i++){
-                    elMenuEspecial = JOptionPane.showInputDialog("¿Ingrese el plato numero " + (i+1)+ " especial que desea?");
+                Object [] menuEspecial = {"Si", "No"};
+                Object confirmarMenu = JOptionPane.showInputDialog(null, "¿Desea hacer un menu especial?, este tendra un costo establecido por el chef", "Reservacion - Evento", 
+                JOptionPane.QUESTION_MESSAGE, null, menuEspecial, menuEspecial[0]);
+                if (confirmarMenu==menuEspecial[0]){
+                    cantidadPlatosEspeciales = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos menu especial desea realizar?"));
+                    int i=0;
+                    for(i=0;i<cantidadPlatosEspeciales;i++){
+                        elMenuEspecial = JOptionPane.showInputDialog("¿Ingrese el plato numero " + (i+1)+ " especial que desea?");
+                    }
                 }
-            }
-
-            Object [] serviciosEspeciales = {"Si", "No"};
-            Object serviciosExtra = JOptionPane.showInputDialog(null, "¿Desea tener servicios extra? - (DJ y sistemas de Sonido, Anfitrion del Evento/Espectaculo, Fotografia y estudios externos e internos, decoracion al gusto del cliente y seguridad)", "Reservacion - Evento", 
-            JOptionPane.QUESTION_MESSAGE, null, serviciosEspeciales, serviciosEspeciales[0]);
-            if(serviciosExtra==serviciosEspeciales[0]){
-                cantidadServiciosExtras = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos servicios especiales desea tener en su evento?"));
-                int i=0;
-                for(i=0;i<cantidadServiciosExtras;i++){
-                    Object [] opcionesServiciosExtra = {"DJ y sistemas de sonido", "Anfitrion", "Fotografia y estudios", "Decoracion", "Seguridad"};
-                    Object servicioContratado = JOptionPane.showInputDialog(null, "Servicio numero "+(i+1)+" a contratar:", "Reservacion - Evento", 
-                    JOptionPane.QUESTION_MESSAGE, null, opcionesServiciosExtra, opcionesServiciosExtra[0]);                        
-                }              
-            }        
+                Object [] serviciosEspeciales = {"Si", "No"};
+                Object serviciosExtra = JOptionPane.showInputDialog(null, "¿Desea tener servicios extra? - (DJ y sistemas de Sonido, Anfitrion del Evento/Espectaculo, Fotografia y estudios externos e internos, decoracion al gusto del cliente y seguridad)", "Reservacion - Evento", 
+                JOptionPane.QUESTION_MESSAGE, null, serviciosEspeciales, serviciosEspeciales[0]);
+                if(serviciosExtra==serviciosEspeciales[0]){
+                    cantidadServiciosExtras = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantos servicios especiales desea tener en su evento?"));
+                    int i=0;
+                    for(i=0;i<cantidadServiciosExtras;i++){
+                        Object [] opcionesServiciosExtra = {"DJ y sistemas de sonido", "Anfitrion", "Fotografia y estudios", "Decoracion", "Seguridad"};
+                        Object servicioContratado = JOptionPane.showInputDialog(null, "Servicio numero "+(i+1)+" a contratar:", "Reservacion - Evento", 
+                        JOptionPane.QUESTION_MESSAGE, null, opcionesServiciosExtra, opcionesServiciosExtra[0]);                        
+                    }              
+                }
+                reserva EventoCerrado = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, "Todas");
+                EventoCerrado.guardarReservaEventoAbiertoyCerrado();
+            }   
         }
 
         // Caso en que la reserva sea tipo NORMAL
@@ -146,9 +213,9 @@ public class principal{
             }
 
             // Llenado del constructor con los datos obtenidos de la reserva para posteriormente guardarlo en archivo.txt
-            reserva Reserva = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, (int)cantidadPersonasReserva, (int)cantidadMesasReserva,
+            reserva ReservaNormal = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, (int)cantidadPersonasReserva, (int)cantidadMesasReserva,
             (String)revisar_reserva, (String)areaElegida);
-            Reserva.guardarReservaNormal();              
+            ReservaNormal.guardarReservaNormal();              
         }     
     }
 }
