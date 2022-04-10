@@ -1,19 +1,29 @@
+import java.io.IOException;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class principal{
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException{
         int cantidadPersonasReserva;
         int cantidadMesasReserva;
         int cantidadPlatosEspeciales;
         int cantidadServiciosExtras;
         String elMenuEspecial;
         String nombreCompleto;
+        String comida;
+        String degustacion;
         int rut;
+        float horaInicio;
+        float horaFin;
 
         // Datos personales del cliente
         nombreCompleto = JOptionPane.showInputDialog("Escriba su nombre completo para comenzar a registrar su reserva");
         rut = Integer.parseInt(JOptionPane.showInputDialog("Ingrese su RUT"));
+
+        // Horas reserva
+        horaInicio = Float.parseFloat(JOptionPane.showInputDialog("Escriba la hora a la cual llegara, por ejemplo:   16.30"));
+        horaFin = Float.parseFloat(JOptionPane.showInputDialog("Escriba la hora a la cual finalizará su reserva, por ejemplo:  19.50"));
+        
 
         // Verificar si el cliente es visitante o no
         Object [] visitante = {"Si", "No"};
@@ -23,7 +33,7 @@ public class principal{
         // Verificar el tipo de reserva
         Object [] tipo_reserva = {"Normal", "Evento", "Matrimonio"};
         Object revisar_reserva = JOptionPane.showInputDialog(null, "¿Que tipo de reserva quiere realizar?", "Reservacion", JOptionPane.QUESTION_MESSAGE, null, tipo_reserva, tipo_reserva[0]);
-        
+
         // En caso de que sea MATRIMONIO
         if (revisar_reserva==tipo_reserva[2]){
             Object [] confirmarMatrimonio = {"Si", "No"};
@@ -99,19 +109,46 @@ public class principal{
 
         // Caso en que la reserva sea tipo NORMAL
         if (revisar_reserva==tipo_reserva[0]){
+            Object [] opciones_areas = {"Central", "Sala Varas", "Sala Montt", "Terraza"};
             cantidadPersonasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas personas asistiran dentro de su reserva?"));
             cantidadMesasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas mesas usara para su reserva? - Las mesas se pueden de a 2, 3 y 5 personas"));
+            Object areaElegida = JOptionPane.showInputDialog(null, "¿Que plan de comida desea?", "Reservacion - Evento", 
+                JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);
+
+            // Comidas y degustaciones
             int i=0;
             Object [] planes_comida = {"Incial: Incluye el plato principal de una comida (almuerzo o cena) del menu diario a gusto del chef. ($20.000)", "Intermedio: Incluye una comida de tres tiempos (entrada, fondo y postre) del menu diario a gusto del chef ($45.000).", "Avanzado: Incluye dos comidas, almuerzo y cena, de tres tiempos del menu abierto de especialidad del chef. ($60.000)", "Ninguno"};
             Object [] planes_degustacion = {"Locales: Incluye tres platos locales en una interpretacion unica. ($30.000)","Internacionales: Incluye tres platos internacionales en una interpretacion unica. ($36.000)", "Cocina Fusion: Incluye tres platos creados en base a alimentos locales, pero utilizando tecnicas de otros paises enuna interpretacion unica. ($40.000)", "Ninguno"};
             for(i=0;i<cantidadPersonasReserva;i++){
                 Object PlanComidaElegida = JOptionPane.showInputDialog(null, "¿Que plan de comida desea?", "Reservacion - Evento", 
                 JOptionPane.QUESTION_MESSAGE, null, planes_comida, planes_comida[0]);
+                if(PlanComidaElegida==planes_comida[0]){
+                    PlanComidaElegida = "Inicial";
+                }
+                if(PlanComidaElegida==planes_comida[1]){
+                    PlanComidaElegida = "Intermedio";
+                }
+                if(PlanComidaElegida==planes_comida[2]){
+                    PlanComidaElegida = "Avanzado";
+                }
 
                 Object PlanDegustacionElegida = JOptionPane.showInputDialog(null, "¿Que plan de degustacion desea?", "Reservacion", 
                 JOptionPane.QUESTION_MESSAGE, null, planes_degustacion, planes_degustacion[0]);
-            }   
+                if(PlanDegustacionElegida==planes_degustacion[0]){
+                    PlanDegustacionElegida = "Local";
+                }
+                if(PlanDegustacionElegida==planes_degustacion[1]){
+                    PlanDegustacionElegida = "Internacional";
+                }
+                if(PlanDegustacionElegida==planes_degustacion[2]){
+                    PlanDegustacionElegida = "Cocina fusion";
+                }
+            }
+
+            // Llenado del constructor con los datos obtenidos de la reserva para posteriormente guardarlo en archivo.txt
+            reserva Reserva = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, (int)cantidadPersonasReserva, (int)cantidadMesasReserva,
+            (String)revisar_reserva, (String)areaElegida);
+            Reserva.guardarReservaNormal();              
         }     
     }
 }
-
