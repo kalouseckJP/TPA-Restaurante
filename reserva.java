@@ -116,9 +116,13 @@ public class reserva extends cliente {
     public void guardarReservaNormal() throws IOException{
         File archivoReservas = new File("ReservasNormales.txt");
         FileWriter escribirReserva = new FileWriter("ReservasNormales.txt", true);
-        escribirReserva.append("NOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
-        " - TOTAL PERSONAS: "+getInvitados()+" - MESAS USADAS: "+getMesas()+ " - TIPO RESERVA: "+getTipoReserva()+" - AREA: "+getArea());
-        escribirReserva.close();
+        if(archivoReservas.exists() && !archivoReservas.isDirectory()){
+            escribirReserva.append("NOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
+            " - TOTAL PERSONAS: "+getInvitados()+" - MESAS USADAS: "+getMesas()+ " - TIPO RESERVA: "+getTipoReserva()+" - AREA: "+getArea());
+            escribirReserva.close();
+        }else{
+            archivoReservas.createNewFile();
+        }
     }
 
     // Guardar datos de reserva EVENTO
