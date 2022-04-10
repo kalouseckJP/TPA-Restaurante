@@ -3,10 +3,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class reserva extends cliente {
-    private float horaInicio;
-    private float horaFin;
     private int invitados;
     private int mesas;
+    private float horaInicio;
+    private float horaFin;
     private String tipoReserva;
     private String planComida;
     private String planDegustacion;
@@ -48,11 +48,20 @@ public class reserva extends cliente {
         this.modalidad = modalidad;
         this.invitados = invitados;
         this.area = area;
+        this.area2 = area2;
+    }
+
+    // Constructor MATRIMONIO
+    public reserva(String nombre, int rut, float horaInicio, float horaFin, String tipoReserva){
+        this.nombre = nombre;
+        this.rut = rut;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.tipoReserva = tipoReserva;
     }
 
 
-    // GETTERS Y SETTERS
-
+    // GETTERS Y SETTERS DE ATRIBUTOS
     // Nombre
     public String getNombre() {
         return nombre;
@@ -140,7 +149,7 @@ public class reserva extends cliente {
         this.area = area;
     }
 
-    // Area
+    // Area 2
     public String getArea2() {
         return area2;
     }
@@ -148,31 +157,23 @@ public class reserva extends cliente {
         this.area2 = area2;
     }
 
+    // METODOS PARA GUARDAR DATOS
     // Guardar datos de reserva NORMAL
     public void guardarReservaNormal() throws IOException{
         File archivoReservasNormales = new File("ReservasNormales.txt");
         FileWriter escribirReserva = new FileWriter("ReservasNormales.txt", true);
-        if(archivoReservasNormales.exists() && !archivoReservasNormales.isDirectory()){
-            escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
-            " - TOTAL PERSONAS: "+getInvitados()+" - MESAS USADAS: "+getMesas()+ " - TIPO RESERVA: "+getTipoReserva()+" - AREA: "+getArea());
-            escribirReserva.close();
-        }else{
-            archivoReservasNormales.createNewFile();
-        }
-        
+        escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
+        " - TOTAL PERSONAS: "+getInvitados()+" - MESAS USADAS: "+getMesas()+ " - TIPO RESERVA: "+getTipoReserva()+" - AREA: "+getArea());
+        escribirReserva.close();
     }
 
     // Guardar datos de reserva EVENTO ABIERTO
     public void guardarReservaEventoAbiertoyCerrado() throws IOException{
         File archivoReservasEvento = new File("ReservasEvento.txt");
         FileWriter escribirReserva = new FileWriter("ReservasEvento.txt", true);
-        if(archivoReservasEvento.exists() && archivoReservasEvento.isDirectory()){
-            escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
-            " - TOTAL PERSONAS: "+getInvitados()+" - TIPO RESERVA: "+getTipoReserva()+" - MODALIDAD: "+getModalidad()+" - AREA: "+getArea());
-            escribirReserva.close();
-        }else{
-            archivoReservasEvento.createNewFile();
-        }
+        escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
+        " - TOTAL PERSONAS: "+getInvitados()+" - TIPO RESERVA: "+getTipoReserva()+" - MODALIDAD: "+getModalidad()+" - AREA: "+getArea());
+        escribirReserva.close();
 
     }
 
@@ -180,12 +181,17 @@ public class reserva extends cliente {
     public void guardarReservaEventoSemicerrado() throws IOException{
         File archivoReservasEvento = new File("ReservasEvento.txt");
         FileWriter escribirReserva = new FileWriter("ReservasEvento.txt", true);
-        if(archivoReservasEvento.exists() && archivoReservasEvento.isDirectory()){
-            escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
-            " - TOTAL PERSONAS: "+getInvitados()+" - TIPO RESERVA: "+getTipoReserva()+" - MODALIDAD: "+getModalidad()+" - AREA 1: "+getArea()+" - AREA 2: "+getArea2());
-            escribirReserva.close();
-        }else{
-            archivoReservasEvento.createNewFile();
-        }
+        escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
+        " - TOTAL PERSONAS: "+getInvitados()+" - TIPO RESERVA: "+getTipoReserva()+" - MODALIDAD: "+getModalidad()+" - AREA 1: "+getArea()+" - AREA 2: "+getArea2());
+        escribirReserva.close();
+    }
+
+    // Guardar datos de reserva MATRIMONIO
+    public void guardarReservaMatrimonio() throws IOException{
+        File archivoReservasEvento = new File("ReservasMatrimonio.txt");
+        FileWriter escribirReserva = new FileWriter("ReservasMatrimonio.txt", true);
+        escribirReserva.append("\nNOMBRE: "+ getNombre()+" - RUT: "+getRut()+" - HORA INICIO: "+getHoraInicio()+" - HORA FIN: "+getHoraFin()+
+        " - TIPO RESERVA: "+getTipoReserva());
+        escribirReserva.close();
     }
 }

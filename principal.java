@@ -18,13 +18,15 @@ public class principal{
 
         // Datos personales del cliente
         nombreCompleto = JOptionPane.showInputDialog("Escriba su nombre completo para comenzar a registrar su reserva");
-        rut = Integer.parseInt(JOptionPane.showInputDialog("Ingrese su RUT"));
+        rut = Integer.parseInt(JOptionPane.showInputDialog("Ingrese su RUT sin digito verificador"));
+        while(rut>26000000 || rut<16000000){
+            rut = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el RUT SIN DIGITO VERIFICADOR"));
+        }
 
         // Horas reserva
         horaInicio = Float.parseFloat(JOptionPane.showInputDialog("Escriba la hora a la cual llegara, por ejemplo:   16.30"));
         horaFin = Float.parseFloat(JOptionPane.showInputDialog("Escriba la hora a la cual finalizará su reserva, por ejemplo:  19.50"));
         
-
         // Verificar si el cliente es visitante o no
         Object [] visitante = {"Si", "No"};
         Object revisar_visitante = JOptionPane.showInputDialog(null, "¿Estas usando el servicio de hotel?", "Reservacion", 
@@ -42,6 +44,10 @@ public class principal{
             if (ConfirmaPago==confirmarMatrimonio[0]){
                 JFrame jFrame = new JFrame();
                 JOptionPane.showMessageDialog(jFrame, "Pago y reservacion efectuada. El resto de la atencion pactada del evento el dia anterior, todo lo demas que sea consumido o utilizado se cobrara despues de la realizacion del evento");
+                
+                // Llenado del constructor con los datos obtenidos de la reserva para posteriormente guardarlo en archivo.txt
+                reserva ReservaMatrimonio = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, (String)revisar_reserva);
+                ReservaMatrimonio.guardarReservaMatrimonio();
             }else{
                 JFrame jFrame = new JFrame();
                 JOptionPane.showMessageDialog(jFrame, "Pago y reservacion cancelada.");
@@ -49,8 +55,7 @@ public class principal{
         }
 
         // En caso de que sea tipo EVENTO
-        if (revisar_reserva==tipo_reserva[1]){
-            
+        if (revisar_reserva==tipo_reserva[1]){          
             Object [] modalidad_reserva = {"Abierta", "Semicerrada", "Cerrada"};
             Object [] opciones_areas = {"Central", "Sala Varas", "Sala Montt", "Terraza"};
             Object modalidad = JOptionPane.showInputDialog(null, "¿Que modalidad desea?", "Reservacion", 
@@ -83,40 +88,23 @@ public class principal{
                         JOptionPane.QUESTION_MESSAGE, null, opcionesServiciosExtra, opcionesServiciosExtra[0]);                        
                     }              
                 }
-            reserva EventoAbierto = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, (String)area_elegida);
-            EventoAbierto.guardarReservaEventoAbiertoyCerrado();
+
+                // Llenado del constructor con los datos obtenidos de la reserva para posteriormente guardarlo en archivo.txt
+                reserva EventoAbierto = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, (String)area_elegida);
+                EventoAbierto.guardarReservaEventoAbiertoyCerrado();
             }
 
                 
             // Modalidad SEMICERRADA
             if(modalidad==modalidad_reserva[1]){               
-                
-                Object [] limiteSemicerrada = {"1", "2"};
-                Object cantidadAreas = JOptionPane.showInputDialog(null, "¿Cuantas area/s reservara?", "Reservacion - Evento", 
-                JOptionPane.QUESTION_MESSAGE, null, limiteSemicerrada, limiteSemicerrada[0]);
                 cantidadPersonasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas personas asistiran dentro de su reserva?"));
-                int i=0;
-                if (cantidadAreas==limiteSemicerrada[0]){                    
-                    Object primeraAreaElegida = JOptionPane.showInputDialog(null, "¿Que area reservara?", "Reservacion - Evento", 
-                    JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);
-                    reserva ReservaEventoSemicerradoUnaArea = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, 
-                    (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, (String)primeraAreaElegida, "Sin segunda area");
-                    ReservaEventoSemicerradoUnaArea.guardarReservaEventoSemicerrado();                
-
-                }
-                
-                if (cantidadAreas==limiteSemicerrada[1]){
-                    Object primeraAreaElegida = JOptionPane.showInputDialog(null, "¿Que primera area reservara?", "Reservacion - Evento", 
-                    JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);                    
-                    
-                    Object segundaAreaElegida = JOptionPane.showInputDialog(null, "¿Que segunda area reservara?", "Reservacion - Evento", 
-                    JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);
-                    reserva ReservaEventoSemicerradoDosAreas = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, 
-                    (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, (String)primeraAreaElegida, (String)segundaAreaElegida);
-                    ReservaEventoSemicerradoDosAreas.guardarReservaEventoSemicerrado();
-                }
-                
-                
+                int i=0;        
+                Object [] opcionesAreasSemicerrado = {"Central", "Sala Varas", "Sala Montt", "Terraza"};
+                Object [] segundasOpcionesAreasSemicerrado = {"Central", "Sala Varas", "Sala Montt", "Terraza", "Ninguna area mas"};
+                Object primeraAreaElegida = JOptionPane.showInputDialog(null, "¿Que area reservara?", "Reservacion - Evento", 
+                JOptionPane.QUESTION_MESSAGE, null, opcionesAreasSemicerrado, opcionesAreasSemicerrado[0]);                         
+                Object segundaAreaElegida = JOptionPane.showInputDialog(null,"Elija otra area en caso de que sea necesaria en su reserva, de lo contrario, opte por 'Ninguna area mas'", "Reservacion - Evento", 
+                JOptionPane.QUESTION_MESSAGE, null, segundasOpcionesAreasSemicerrado, segundasOpcionesAreasSemicerrado[0]);             
                 Object [] menuEspecial = {"Si", "No"};
                 Object confirmarMenu = JOptionPane.showInputDialog(null, "¿Desea hacer un menu especial?, este tendra un costo establecido por el chef", "Reservacion - Evento", 
                 JOptionPane.QUESTION_MESSAGE, null, menuEspecial, menuEspecial[0]);
@@ -137,13 +125,13 @@ public class principal{
                         JOptionPane.QUESTION_MESSAGE, null, opcionesServiciosExtra, opcionesServiciosExtra[0]);                        
                     }              
                 }
-                
-                
-            
-            
 
+                // Llenado del constructor con los datos obtenidos de la reserva para posteriormente guardarlo en archivo.txt
+                reserva ReservaEventoSemicerrado = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, 
+                (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, (String)primeraAreaElegida, (String)segundaAreaElegida);
+                ReservaEventoSemicerrado.guardarReservaEventoSemicerrado();              
             }
-
+            
             // Modalidad CERRADA
             if(modalidad==modalidad_reserva[2]){
                 cantidadPersonasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas personas asistiran dentro de su reserva?"));
@@ -169,6 +157,8 @@ public class principal{
                         JOptionPane.QUESTION_MESSAGE, null, opcionesServiciosExtra, opcionesServiciosExtra[0]);                        
                     }              
                 }
+
+                // Llenado del constructor con los datos obtenidos de la reserva para posteriormente guardarlo en archivo.txt
                 reserva EventoCerrado = new reserva((String)nombreCompleto, (int)rut, (float)horaInicio, (float)horaFin, (String)revisar_reserva, (String)modalidad, (int)cantidadPersonasReserva, "Todas");
                 EventoCerrado.guardarReservaEventoAbiertoyCerrado();
             }   
@@ -180,7 +170,7 @@ public class principal{
             cantidadPersonasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas personas asistiran dentro de su reserva?"));
             cantidadMesasReserva = Integer.parseInt(JOptionPane.showInputDialog("¿Cuantas mesas usara para su reserva? - Las mesas se pueden de a 2, 3 y 5 personas"));
             Object areaElegida = JOptionPane.showInputDialog(null, "¿Que plan de comida desea?", "Reservacion - Evento", 
-                JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);
+            JOptionPane.QUESTION_MESSAGE, null, opciones_areas, opciones_areas[0]);
 
             // Comidas y degustaciones
             int i=0;
@@ -198,7 +188,6 @@ public class principal{
                 if(PlanComidaElegida==planes_comida[2]){
                     PlanComidaElegida = "Avanzado";
                 }
-
                 Object PlanDegustacionElegida = JOptionPane.showInputDialog(null, "¿Que plan de degustacion desea?", "Reservacion", 
                 JOptionPane.QUESTION_MESSAGE, null, planes_degustacion, planes_degustacion[0]);
                 if(PlanDegustacionElegida==planes_degustacion[0]){
