@@ -15,7 +15,10 @@ public class principal{
         int rut;
         float horaInicio;
         float horaFin;
-
+        
+        //Mesas
+        Mesas.crearMesas();
+        
         // Datos personales del cliente
         nombreCompleto = JOptionPane.showInputDialog("Escriba su nombre completo para comenzar a registrar su reserva");
         rut = Integer.parseInt(JOptionPane.showInputDialog("Ingrese su RUT sin digito verificador"));
