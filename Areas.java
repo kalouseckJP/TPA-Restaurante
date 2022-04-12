@@ -1,9 +1,9 @@
 public class Areas{
   int cantidad;
   String nombreArea;
-  Mesas disponible;
+  int disponible;
 
-  public Areas(int cantidad, String nombreArea, Mesas disponible){
+  public Areas(int cantidad, String nombreArea, int disponible){
     this.cantidad = cantidad;
     this.nombreArea= nombreArea;
     this.disponible= disponible;

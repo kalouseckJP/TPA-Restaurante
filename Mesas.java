@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Mesas{
   Boolean ocupadas;
@@ -30,13 +31,21 @@ public class Mesas{
     if(!archivoMesas.exists()){try (FileWriter escribirMesas = new FileWriter("ArchivoMesas.txt")) {
       for(i=1;i<=95;i++){
           if(i<=50){escribirMesas.write(i + ";" + "3" + ";" + "false\n");
-            new Mesas(i, 3, false);}
+            Mesas x = new Mesas(i, 3, false);
+            add(i, x);}
           if(i>50 && i<=70){escribirMesas.write(i + ";" + "5" + ";" + "false\n");
-            new Mesas(i, 5, false);}
+            Mesas x = new Mesas(i, 5, false);
+            add(i, x);}
           if(i>70){escribirMesas.write(i + ";" + "2" + ";" + "false\n");
-            new Mesas(i, 2, false);}
+            Mesas x = new Mesas(i, 2, false);
+            add(i, x);}
         }
       }
     }
   }
+  public static void add(int index, Mesas x){
+    ArrayList<Mesas> str=new ArrayList<Mesas>();
+    str.add(x);
+  }
+    
 }
