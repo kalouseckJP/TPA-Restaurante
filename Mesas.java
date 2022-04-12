@@ -29,9 +29,12 @@ public class Mesas{
     File archivoMesas = new File("ArchivoMesas.txt");
     if(!archivoMesas.exists()){try (FileWriter escribirMesas = new FileWriter("ArchivoMesas.txt")) {
       for(i=1;i<=95;i++){
-          if(i<=50){escribirMesas.write(i + ";" + "3" + ";" + "false\n");}
-          if(i>50 && i<=70){escribirMesas.write(i + ";" + "5" + ";" + "false\n");}
-          if(i>70){escribirMesas.write(i + ";" + "2" + ";" + "false\n");}
+          if(i<=50){escribirMesas.write(i + ";" + "3" + ";" + "false\n");
+            new Mesas(i, 3, false);}
+          if(i>50 && i<=70){escribirMesas.write(i + ";" + "5" + ";" + "false\n");
+            new Mesas(i, 5, false);}
+          if(i>70){escribirMesas.write(i + ";" + "2" + ";" + "false\n");
+            new Mesas(i, 2, false);}
         }
       }
     }

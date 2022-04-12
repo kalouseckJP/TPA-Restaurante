@@ -43,7 +43,7 @@ public class principal{
             14.59 && horaFin < 15 || horaFin > 15.59 && horaFin < 16 || horaFin > 16.59 && horaFin < 17 || horaFin > 
             17.59 && horaFin < 18 || horaFin > 18.59 && horaFin < 19 || horaFin > 19.59 && horaFin < 20 || horaFin > 
             20.59 && horaFin < 21 || horaFin > 21.59 && horaFin < 22 || horaFin > 22.59 && horaFin < 23 || horaFin > 
-            23 || horaFin == horaInicio){
+            23 || horaFin == horaInicio || horaInicio<horaFin){
             horaFin = Float.parseFloat(JOptionPane.showInputDialog("Escriba un hora valida a la cual finalizará su reserva, por ejemplo:  19.50"));
         }
         // Verificar si el cliente es visitante o no
