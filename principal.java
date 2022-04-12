@@ -37,13 +37,7 @@ public class principal{
             horaInicio = Float.parseFloat(JOptionPane.showInputDialog("Escriba una hora valida a la cual llegara, por ejemplo:   16.30"));
         }
         horaFin = Float.parseFloat(JOptionPane.showInputDialog("Escriba la hora a la cual finalizará su reserva, por ejemplo:  19.50"));
-        while(horaFin < 5 || horaFin > 5.59 && horaFin < 6 || horaFin > 6.59 && horaFin < 7 || horaFin > 7.59 && horaFin < 
-            8 || horaFin > 8.59 && horaFin < 9 || horaFin > 9.59 && horaFin < 10 || horaFin > 10.59 && horaFin < 11 || horaFin > 
-            11.59 && horaFin < 12 || horaFin >  12.59 && horaFin < 13 || horaFin > 13.59 && horaFin < 14 || horaFin > 
-            14.59 && horaFin < 15 || horaFin > 15.59 && horaFin < 16 || horaFin > 16.59 && horaFin < 17 || horaFin > 
-            17.59 && horaFin < 18 || horaFin > 18.59 && horaFin < 19 || horaFin > 19.59 && horaFin < 20 || horaFin > 
-            20.59 && horaFin < 21 || horaFin > 21.59 && horaFin < 22 || horaFin > 22.59 && horaFin < 23 || horaFin > 
-            23 || horaFin == horaInicio || horaInicio<horaFin){
+        while(horaInicio>horaFin){
             horaFin = Float.parseFloat(JOptionPane.showInputDialog("Escriba un hora valida a la cual finalizará su reserva, por ejemplo:  19.50"));
         }
         // Verificar si el cliente es visitante o no

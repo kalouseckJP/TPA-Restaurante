@@ -1,5 +1,4 @@
-public class cliente {
+public class cliente extends Persona {
     // Atributos
-    String nombre;
-    int rut;    
+    Boolean visitHotel;   
 }
